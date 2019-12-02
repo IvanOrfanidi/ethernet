@@ -219,7 +219,7 @@
                 </option>
                 <option>
                     <name>CCDefines</name>
-                    <state>STM32F10X_HD</state>
+                    <state>STM32F10X_MD</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -350,6 +350,7 @@
                     <state>$PROJ_DIR$\STM32F10x_Drivers_Lib\CMSIS\CM3\DeviceSupport\ST\STM32F10x</state>
                     <state>$PROJ_DIR$\STM32F10x_Drivers_Lib\inc</state>
                     <state>$PROJ_DIR$\ethernet</state>
+                    <state>$PROJ_DIR$\hd44780</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2042,6 +2043,12 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>HD44780</name>
+        <file>
+            <name>$PROJ_DIR$\hd44780\hd44780.cpp</name>
+        </file>
+    </group>
     <group>
         <name>Net</name>
         <file>

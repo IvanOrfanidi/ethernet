@@ -1,23 +1,36 @@
+/**
+ ******************************************************************************
+ * @file    main.cpp
+ * @author  Ivan Orfanidi
+ * @version V1.0.0
+ * @date    10-2019
+ * @brief
+ ******************************************************************************
+ * @attention
+ *
+ ******************************************************************************
+ */
 
-
-/* Standart lib */
-#include <iostream>
-#include <time.h>
-
-/* Driver lib */
-#include "spi.hpp"
-#include "ethernet/enc28j60.hpp"
-#include "exti.hpp"
-#include "gpio.hpp"
+/* Includes ------------------------------------------------------------------*/
+#include "main.hpp"
 
 int main()
 {
-    auto& systick = Systick::getInstance();
-    // Configure 1 tick - 1 msec
-    systick.init(SystemCoreClock, 1000);
+    Main();
+}
 
+Main::Main() : _systick(Systick::getInstance()), _lcd(4, 20), _net(nullptr)
+{
+    // Configure 1 tick - 1 msec
+    _systick.init(SystemCoreClock, 1000);
+
+    initNet();
+}
+
+void Main::initNet()
+{
     // Create SPI interface class
-    Spi* spi = Spi::getInstance(SPI1);
+    static Spi* spi = Spi::getInstance(SPI1);
 
     // Configure
     Spi::Config spiConfig;
@@ -50,8 +63,5 @@ int main()
     config.tcpPort = 80;
 
     // Create NET class
-    Enc28j60* net = new Enc28j60(&interface, &config);
-
-    while(true) {
-    }
+    Enc28j60* _net = new Enc28j60(&interface, &config);
 }

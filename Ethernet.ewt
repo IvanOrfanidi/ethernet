@@ -2374,6 +2374,12 @@
         </settings>
     </configuration>
     <group>
+        <name>HD44780</name>
+        <file>
+            <name>$PROJ_DIR$\hd44780\hd44780.cpp</name>
+        </file>
+    </group>
+    <group>
         <name>Net</name>
         <file>
             <name>$PROJ_DIR$\ethernet\enc28j60.cpp</name>
