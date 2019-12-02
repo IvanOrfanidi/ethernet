@@ -29,7 +29,6 @@ int main()
     spiConfig.polarity = Spi::Polarity::LOW;
     spiConfig.firstBit = Spi::FirstBit::MSB;
     spi->init(&spiConfig);
-
     spi->createInterrupt();
 
     // Config interface
@@ -38,12 +37,10 @@ int main()
 
     interface.interruptPort = GPIOC;
     interface.interruptPin = 6;
-
     interface.resetPort = GPIOC;
     interface.resetPin = 5;
-
-    interface.cePort = GPIOC;
-    interface.cePin = 4;
+    interface.csPort = GPIOC;
+    interface.csPin = 4;
 
     Enc28j60::Config config;
     constexpr uint8_t MAC[] = { 0x00, 0x2F, 0x68, 0x12, 0xAC, 0x30 };
