@@ -59,7 +59,7 @@ void Main::initNet()
     constexpr uint8_t MAC[] = { 0x00, 0x2F, 0x68, 0x12, 0xAC, 0x30 };
     memcpy(config.macAddr, MAC, Enc28j60::MAC_ADDR_SIZE);
     constexpr uint8_t IP[] = { 192, 168, 0, 200 };
-    memcpy(config.macAddr, IP, Enc28j60::IP_ADDR_SIZE);
+    memcpy(config.ipAddr, IP, Enc28j60::IP_ADDR_SIZE);
     config.tcpPort = 80;
 
     // Create NET class

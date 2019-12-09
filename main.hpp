@@ -41,9 +41,7 @@ class Main {
 
     // Drivers interface
     Systick& _systick;
-
     Hd44780 _lcd;
-
     Enc28j60* _net;
 };
 

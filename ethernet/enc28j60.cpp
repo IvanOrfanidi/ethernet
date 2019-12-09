@@ -17,7 +17,7 @@
 #include "enc28j60.hpp"
 
 /**
- * @brief Nonstructor
+ * @brief Constructor
  * @param [in] port - virtual port (SPI)
  */
 Enc28j60::Enc28j60(const SpiInterface::Config* interfaceConfig,
@@ -111,10 +111,15 @@ Enc28j60::Enc28j60(const SpiInterface::Config* interfaceConfig,
     }
 
     // Create memory
-    _buffer = new uint8_t[config->sizeBuf];
+    _buffer = ::new uint8_t[config->sizeBuf];
 
     // Attacgh interrupt, calling update
     _interface.attach(this);
+}
+
+Enc28j60::~Enc28j60()
+{
+    ::delete[] _buffer;
 }
 
 void Enc28j60::initPhy()
@@ -210,9 +215,11 @@ void Enc28j60::readBuffer(uint8_t* data, size_t len)
 {
     _interface.setSelect(true);
     _interface.sendByte(ENC28J60_READ_BUF_MEM);
+
     for(size_t i = 0; i < len; ++i) {
         *data++ = _interface.getByte();
     }
+
     _interface.setSelect(false);
 }
 
@@ -262,8 +269,9 @@ size_t Enc28j60::packetReceive(uint8_t* packet, size_t maxLen)
     rxstat |= readOp(ENC28J60_READ_BUF_MEM, 0) << 8;
 
     // limit retrieve length
-    if(len > maxLen - 1) {
-        len = maxLen - 1;
+    const size_t limit = maxLen - 1;
+    if(len > limit) {
+        len = limit;
     }
     // check CRC and symbol errors (see datasheet page 44, table 7-3):
     // The ERXFCON.CRCEN is set by default. Normally we should not

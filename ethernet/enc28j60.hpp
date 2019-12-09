@@ -54,6 +54,8 @@ class Enc28j60 final
 
     Enc28j60(const SpiInterface::Config*, const Config*);
 
+    ~Enc28j60();
+
     bool isError() const;
 
     virtual void update();
